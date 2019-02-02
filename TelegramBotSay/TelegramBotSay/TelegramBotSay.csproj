@@ -73,6 +73,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\BaseNotifyPropertyChanged.cs" />
+    <Compile Include="Common\DevConstants.cs" />
+    <Compile Include="Core\RandonDate.cs" />
+    <Compile Include="Core\Settings.cs" />
+    <Compile Include="Interfaces\IMainWindowModel.cs" />
+    <Compile Include="Interfaces\IWindowInputDialogModel.cs" />
     <Compile Include="Models\WindowInputDialogModel.cs" />
     <Compile Include="WindowInputDialog.xaml.cs">
       <DependentUpon>WindowInputDialog.xaml</DependentUpon>

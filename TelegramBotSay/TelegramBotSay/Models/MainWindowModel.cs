@@ -1,10 +1,11 @@
 ﻿using System;
 using TelegramBotSay.Common;
 using TelegramBotSay.Core;
+using TelegramBotSay.Interfaces;
 
 namespace TelegramBotSay.Models
 {
-    public class MainWindowModel : BaseNotifyPropertyChanged
+    public class MainWindowModel : BaseNotifyPropertyChanged, IMainWindowModel
     {
         private DateTime _nexTimeSending;
         private string _messageToSend;
@@ -13,9 +14,13 @@ namespace TelegramBotSay.Models
 
         public MainWindowModel()
         {
-            _nexTimeSending = DateTime.Now;
-            _messageToSend = "Test";
-            _textRrecpient = "Test Rrecpient";
+            if (!Settings.Load(this))
+            {
+                _nexTimeSending = DateTime.Now;
+                _messageToSend = "No message";
+                _textRrecpient = "No recpient";
+            }
+
             CommandSaveClick = new RelayCommand(ButtonSaveClick_OnClick);
             CommandSendNowClick = new RelayCommand(ButtonSendNowClick_OnClick);
             CommandChangeRecepientClick = new RelayCommand(ButtonChangeRecepientClick_OnClick);
@@ -23,14 +28,28 @@ namespace TelegramBotSay.Models
 
         public DateTime NexTimeSending
         {
-            get { return _nexTimeSending; }
-            set { SetValue(ref _nexTimeSending, value); }
+            get
+            {
+                return _nexTimeSending;
+            }
+            set
+            {
+                SetValue(ref _nexTimeSending, value);
+                Settings.Save(this);
+            }
         }
 
         public string MessageToSend
         {
-            get { return _messageToSend; }
-            set { SetValue(ref _messageToSend, value); }
+            get
+            {
+                return _messageToSend;
+            }
+            set
+            {
+                SetValue(ref _messageToSend, value);
+                Settings.Save(this);
+            }
         }
 
         public string TextInEdit
@@ -41,8 +60,15 @@ namespace TelegramBotSay.Models
 
         public string TextRrecpient
         {
-            get { return _textRrecpient; }
-            set { SetValue(ref _textRrecpient, value); }
+            get
+            {
+                return _textRrecpient;
+            }
+            set
+            {
+                SetValue(ref _textRrecpient, value);
+                Settings.Save(this);
+            }
         }
 
         public RelayCommand CommandSaveClick { get; set; }
@@ -69,7 +95,10 @@ namespace TelegramBotSay.Models
 
             windowInputDialogChangeRecepient.ShowDialog();
 
-            TextRrecpient = windowInputDialogChangeRecepient.InputModel.TextEdit;
+            if (!string.IsNullOrEmpty(windowInputDialogChangeRecepient.InputModel.TextEdit))
+            {
+                TextRrecpient = windowInputDialogChangeRecepient.InputModel.TextEdit;
+            }
         }
     }
 }

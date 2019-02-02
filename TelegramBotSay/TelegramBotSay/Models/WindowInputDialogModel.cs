@@ -1,9 +1,10 @@
 ﻿using System;
 using TelegramBotSay.Common;
+using TelegramBotSay.Interfaces;
 
 namespace TelegramBotSay.Models
 {
-    public class WindowInputDialogModel : BaseNotifyPropertyChanged
+    public class WindowInputDialogModel : BaseNotifyPropertyChanged, IWindowInputDialogModel
     {
         private string _textEdit;
         private readonly string _textPlaceholderText;
