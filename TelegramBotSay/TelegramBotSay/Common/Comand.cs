@@ -8,7 +8,7 @@ using System.Windows.Input;
 /// default return value for the CanExecute
 /// method is 'true'.
 /// </summary>
-public class RelayCommand : ICommand
+public class Command : ICommand
 {
     #region Fields
 
@@ -23,7 +23,7 @@ public class RelayCommand : ICommand
     /// Creates a new command that can always execute.
     /// </summary>
     /// <param name="execute">The execution logic.</param>
-    public RelayCommand(Action<object> execute): this(execute, null)
+    public Command(Action<object> execute): this(execute, null)
     {
     }
 
@@ -32,7 +32,7 @@ public class RelayCommand : ICommand
     /// </summary>
     /// <param name="execute">The execution logic.</param>
     /// <param name="canExecute">The execution status logic.</param>
-    public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+    public Command(Action<object> execute, Predicate<object> canExecute)
     {
         if (execute == null)
             throw new ArgumentNullException("execute");

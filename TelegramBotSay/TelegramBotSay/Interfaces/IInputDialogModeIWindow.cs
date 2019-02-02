@@ -1,6 +1,6 @@
 ﻿namespace TelegramBotSay.Interfaces
 {
-    public interface IWindowInputDialogModel
+    public interface IInputDialogModeIWindow
     {
         string TextEdit { get; set; }
 
@@ -8,6 +8,6 @@
 
         string TextButtonText { get; }
 
-        RelayCommand CommandCloseWindowClick { get; set; }
+        Command CommandCloseWindowClick { get; set; }
     }
 }

@@ -4,19 +4,19 @@ using TelegramBotSay.Interfaces;
 
 namespace TelegramBotSay.Models
 {
-    public class WindowInputDialogModel : BaseNotifyPropertyChanged, IWindowInputDialogModel
+    public class InputDialogModelWindow : BaseNotifyPropertyChanged, IInputDialogModeIWindow
     {
         private string _textEdit;
         private readonly string _textPlaceholderText;
         private readonly string _textButtonText;
         private Action _colseWindows;
 
-        public WindowInputDialogModel(string textPlaceholderText, string textButtonText, Action colseWindows)
+        public InputDialogModelWindow(string textPlaceholderText, string textButtonText, Action colseWindows)
         {
             _textPlaceholderText = textPlaceholderText;
             _textButtonText = textButtonText;
             _colseWindows = colseWindows;
-            CommandCloseWindowClick = new RelayCommand(ButtonCloseeWindow_OnClick);
+            CommandCloseWindowClick = new Command(ButtonCloseeWindow_OnClick);
         }
         
         public string TextEdit
@@ -35,7 +35,7 @@ namespace TelegramBotSay.Models
             get { return _textButtonText; }
         }
 
-        public RelayCommand CommandCloseWindowClick { get; set; }
+        public Command CommandCloseWindowClick { get; set; }
         
         private void ButtonCloseeWindow_OnClick(object sender)
         {

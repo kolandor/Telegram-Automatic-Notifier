@@ -8,13 +8,14 @@ namespace TelegramBotSay
     /// </summary>
     public partial class WindowInputDialog : Window
     {
-        public WindowInputDialogModel InputModel { get; private set; }
+        public InputDialogModelWindow InputModel { get; private set; }
 
         public WindowInputDialog(string textPlaceholderText, string textButtonText)
         {
             InitializeComponent();
-            InputModel = new WindowInputDialogModel(textPlaceholderText, textButtonText, Close);
+            InputModel = new InputDialogModelWindow(textPlaceholderText, textButtonText, Close);
             this.DataContext = InputModel;
+            TextBoxInput.Focus();
         }
     }
 }

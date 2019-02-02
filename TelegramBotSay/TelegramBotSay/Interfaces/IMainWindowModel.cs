@@ -10,12 +10,12 @@ namespace TelegramBotSay.Interfaces
 
         string TextInEdit { get; set; }
 
-        string TextRrecpient { get; set; }
+        string Rrecpient { get; set; }
 
-        RelayCommand CommandSaveClick { get; set; }
+        Command CommandSaveClick { get; set; }
 
-        RelayCommand CommandSendNowClick { get; set; }
+        Command CommandSendNowClick { get; set; }
 
-        RelayCommand CommandChangeRecepientClick { get; set; }
+        Command CommandChangeRecepientClick { get; set; }
     }
 }

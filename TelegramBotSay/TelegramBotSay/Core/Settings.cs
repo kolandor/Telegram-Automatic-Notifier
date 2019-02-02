@@ -20,7 +20,7 @@ namespace TelegramBotSay.Core
                 {
                     NexTimeSending = mainWindowModel.NexTimeSending,
                     MessageToSend = mainWindowModel.MessageToSend,
-                    TextRrecpient = mainWindowModel.TextRrecpient
+                    TextRrecpient = mainWindowModel.Rrecpient
                 };
             }
         }
@@ -53,7 +53,7 @@ namespace TelegramBotSay.Core
 
                 mainWindowModel.MessageToSend = settings.MessageToSend;
                 mainWindowModel.NexTimeSending = settings.NexTimeSending;
-                mainWindowModel.TextRrecpient = settings.TextRrecpient;
+                mainWindowModel.Rrecpient = settings.TextRrecpient;
             }
             catch
             {

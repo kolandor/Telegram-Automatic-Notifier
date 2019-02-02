@@ -77,8 +77,8 @@
     <Compile Include="Core\RandonDate.cs" />
     <Compile Include="Core\Settings.cs" />
     <Compile Include="Interfaces\IMainWindowModel.cs" />
-    <Compile Include="Interfaces\IWindowInputDialogModel.cs" />
-    <Compile Include="Models\WindowInputDialogModel.cs" />
+    <Compile Include="Interfaces\IInputDialogModeIWindow.cs" />
+    <Compile Include="Models\InputDialogModelWindow.cs" />
     <Compile Include="WindowInputDialog.xaml.cs">
       <DependentUpon>WindowInputDialog.xaml</DependentUpon>
     </Compile>
@@ -90,7 +90,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ComandTest.cs" />
+    <Compile Include="Common\Comand.cs" />
     <Compile Include="Core\TelegramSendingCore.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

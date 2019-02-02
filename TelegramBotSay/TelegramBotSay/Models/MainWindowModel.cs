@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using TelegramBotSay.Common;
 using TelegramBotSay.Core;
 using TelegramBotSay.Interfaces;
@@ -10,7 +11,7 @@ namespace TelegramBotSay.Models
         private DateTime _nexTimeSending;
         private string _messageToSend;
         private string _textInEdit;
-        private string _textRrecpient;
+        private string _recpient;
 
         public MainWindowModel()
         {
@@ -18,14 +19,20 @@ namespace TelegramBotSay.Models
             {
                 _nexTimeSending = DateTime.Now;
                 _messageToSend = "No message";
-                _textRrecpient = "No recpient";
+                _recpient = "No recpient";
             }
 
-            CommandSaveClick = new RelayCommand(ButtonSaveClick_OnClick);
-            CommandSendNowClick = new RelayCommand(ButtonSendNowClick_OnClick);
-            CommandChangeRecepientClick = new RelayCommand(ButtonChangeRecepientClick_OnClick);
+            //Linking commands with methods
+            CommandSaveClick = new Command(ButtonSaveClick_OnClick);
+            CommandSendNowClick = new Command(ButtonSendNowClick_OnClick);
+            CommandChangeRecepientClick = new Command(ButtonChangeRecepientClick_OnClick);
+
+            //A timer that checks the need to send a message.
+            TimerCallback tm = new TimerCallback(TimerSendingCheck);
+            Timer timer = new Timer(tm, null, 0, 60000);
         }
 
+        //Next date auto send message
         public DateTime NexTimeSending
         {
             get
@@ -39,6 +46,7 @@ namespace TelegramBotSay.Models
             }
         }
 
+        //The message that will be sent to the user automatically or when you click "send now"
         public string MessageToSend
         {
             get
@@ -52,30 +60,33 @@ namespace TelegramBotSay.Models
             }
         }
 
+        //Text in the message editing window
         public string TextInEdit
         {
             get { return _textInEdit; }
             set { SetValue(ref _textInEdit, value); }
         }
 
-        public string TextRrecpient
+        //Message recipient
+        public string Rrecpient
         {
             get
             {
-                return _textRrecpient;
+                return _recpient;
             }
             set
             {
-                SetValue(ref _textRrecpient, value);
+                SetValue(ref _recpient, value);
                 Settings.Save(this);
             }
         }
+        
 
-        public RelayCommand CommandSaveClick { get; set; }
+        public Command CommandSaveClick { get; set; }
 
-        public RelayCommand CommandSendNowClick { get; set; }
+        public Command CommandSendNowClick { get; set; }
 
-        public RelayCommand CommandChangeRecepientClick { get; set; }
+        public Command CommandChangeRecepientClick { get; set; }
 
 
         private void ButtonSaveClick_OnClick(object sender)
@@ -83,9 +94,19 @@ namespace TelegramBotSay.Models
             MessageToSend = TextInEdit;
         }
 
+        private void TimerSendingCheck(object sender)
+        {
+            if (DateTime.Now > NexTimeSending)
+            {
+                ButtonSendNowClick_OnClick(null);
+            }
+        }
+
         private void ButtonSendNowClick_OnClick(object sender)
         {
-             TelegramSendingCore.SendMessage(TextRrecpient, MessageToSend);
+            TelegramSendingCore.SendMessage(Rrecpient, MessageToSend);
+
+            NexTimeSending = RandonDate.GetNewRandonTime();
         }
 
         private void ButtonChangeRecepientClick_OnClick(object sender)
@@ -97,7 +118,7 @@ namespace TelegramBotSay.Models
 
             if (!string.IsNullOrEmpty(windowInputDialogChangeRecepient.InputModel.TextEdit))
             {
-                TextRrecpient = windowInputDialogChangeRecepient.InputModel.TextEdit;
+                Rrecpient = windowInputDialogChangeRecepient.InputModel.TextEdit;
             }
         }
     }
