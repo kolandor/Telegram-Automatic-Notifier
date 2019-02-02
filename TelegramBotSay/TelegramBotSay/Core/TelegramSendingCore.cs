@@ -17,7 +17,7 @@ namespace TelegramBotSay.Core
 
         public async static Task Initial()
         {
-            _client = new TelegramClient(DevInfo.API_ID, DevInfo.API_HASH);
+            _client = new TelegramClient(DevConstants.API_ID, DevConstants.API_HASH);
             
             _client.ConnectAsync();
 
@@ -66,7 +66,7 @@ namespace TelegramBotSay.Core
                 .FirstOrDefault(x => x.Username == recepientUserName);
 
             //send message
-            await _client.SendMessageAsync(new TLInputPeerUser() { UserId = user.Id }, message);
+            _client.SendMessageAsync(new TLInputPeerUser() { UserId = user.Id }, message);
         }
     }
 }
