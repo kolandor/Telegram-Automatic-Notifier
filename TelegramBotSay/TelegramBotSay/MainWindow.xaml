@@ -7,11 +7,13 @@
         mc:Ignorable="d"
         Title="Teletgramm Auto Sender" Height="350" Width="525" Name="MainWindowM">
     <Window.Resources>
+        <!--Label style-->
         <Style TargetType="Label" x:Key="LabelStyleSize">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
+        <!--Button style-->
         <Style TargetType="Button" x:Key="ButtonStyleSize">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -19,13 +21,16 @@
             <Setter Property="Opacity" Value="0.8"/>
         </Style>
 
-        <Style x:Key="PlaceHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+        <!--TextBox style-->
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>
         </Style>
 
     </Window.Resources>
+    <!--Main container-->
     <Grid>
+        <!--Gradient background-->
         <Rectangle>
             <Rectangle.Fill>
                 <LinearGradientBrush>
@@ -34,41 +39,55 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+
+        <!--Controls-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
+
+            <!--Info labels-->
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+
+                <!--Time next send-->
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <Label Style="{StaticResource LabelStyleSize}">Time next auto send: </Label>
                     <Label Style="{StaticResource LabelStyleSize}" Content="{Binding NexTimeSending}"></Label>
                 </StackPanel>
+
+                <!--Message to send-->
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Label Style="{StaticResource LabelStyleSize}">Message to send: </Label>
                     <Label Style="{StaticResource LabelStyleSize}" Content="{Binding MessageToSend}"></Label>
                 </StackPanel>
+
+                <!--Recepient nickname-->
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <Label Style="{StaticResource LabelStyleSize}">Recrpient:</Label>
                     <Label Style="{StaticResource LabelStyleSize}" Content="{Binding Rrecpient}"></Label>
                 </StackPanel>
             </Grid>
 
+            <!--Message edit-->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+
                 <Label Grid.Row="0" Style="{StaticResource LabelStyleSize}" Foreground="MintCream">Input new message to send</Label>
-                <TextBox Grid.Row="1" Style="{StaticResource PlaceHolder}" FontSize="20" Tag="" Opacity="0.6" Margin="3" Text="{Binding TextInEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <TextBox Grid.Row="1" Style="{StaticResource TextBoxStyle}" FontSize="20" Tag="" Opacity="0.6" Margin="3" Text="{Binding TextInEdit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
+            <!--Action buttons-->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

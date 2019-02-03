@@ -2,8 +2,17 @@
 
 namespace TelegramBotSay.Core
 {
+    /// <summary>
+    /// Class to generate date
+    /// </summary>
     public static class RandonDate
     {
+        /// <summary>
+        /// Generate date relative to current date.
+        /// The method generates a date according:
+        /// to the algorithm today + (1-2 days) and between 10 am and 3 pm
+        /// </summary>
+        /// <returns></returns>
         public static DateTime GetNewRandonTime()
         {
             Random rnd = new Random();

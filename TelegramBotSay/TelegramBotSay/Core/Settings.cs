@@ -6,14 +6,25 @@ using TelegramBotSay.Common;
 
 namespace TelegramBotSay.Core
 {
+    /// <summary>
+    /// Class engaged in the preservation and loading of application settings
+    /// </summary>
     public static class Settings
     {
+        /// <summary>
+        /// linker subclass for application settings
+        /// </summary>
         private class AppSettings
         {
             public DateTime NexTimeSending { get; set; }
             public string TextRrecpient { get; set; }
             public string MessageToSend { get; set; }
 
+            /// <summary>
+            /// Method of pulling the necessary data from the model
+            /// </summary>
+            /// <param name="mainWindowModel"></param>
+            /// <returns></returns>
             public static AppSettings GetAppSettingsFromModel(IMainWindowModel mainWindowModel)
             {
                 return new AppSettings()
@@ -25,6 +36,11 @@ namespace TelegramBotSay.Core
             }
         }
 
+        /// <summary>
+        /// Saving data from model to file
+        /// </summary>
+        /// <param name="mainWindowModel"></param>
+        /// <returns></returns>
         public static bool Save(IMainWindowModel mainWindowModel)
         {
             try
@@ -43,6 +59,11 @@ namespace TelegramBotSay.Core
             return true;
         }
 
+        /// <summary>
+        /// Loading data from file to model
+        /// </summary>
+        /// <param name="mainWindowModel"></param>
+        /// <returns></returns>
         public static bool Load(IMainWindowModel mainWindowModel)
         {
             try

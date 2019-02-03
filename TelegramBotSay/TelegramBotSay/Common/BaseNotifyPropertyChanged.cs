@@ -4,6 +4,10 @@ using System.Runtime.CompilerServices;
 
 namespace TelegramBotSay.Common
 {
+    /// <summary>
+    /// Class of binding of model and view (MVVM Pattern)
+    /// All classes of models inherited from this class will be able to organize two-way binding.
+    /// </summary>
     public abstract class BaseNotifyPropertyChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

@@ -13,10 +13,12 @@ namespace TelegramBotSay
 
         public MainWindow()
         {
+            //Telegram init
             TelegramSendingCore.Initial();
 
             InitializeComponent();
             
+            //bind model and view
             MainWindowModel = new MainWindowModel();
             this.DataContext = MainWindowModel;
 
